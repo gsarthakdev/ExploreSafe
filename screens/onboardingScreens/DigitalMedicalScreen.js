@@ -120,7 +120,7 @@ function DigitalMedicalScreen({ navigation }) {
 }
 export default DigitalMedicalScreen;
 
-function TextField({
+export function TextField({
   placeholder,
   isAutoCapitalize,
   autoFocus,
@@ -128,6 +128,7 @@ function TextField({
   onBlur,
   autoCorrect,
   textContentType,
+  width
 }) {
   return (
     <TextInput
@@ -139,6 +140,7 @@ function TextField({
         borderColor: "white",
         borderWidth: 2,
         borderRadius: 7,
+        width: width, 
         padding: 6,
         alignItems: "center",
       }}

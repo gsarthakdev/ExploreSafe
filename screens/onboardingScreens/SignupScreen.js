@@ -12,6 +12,8 @@ import * as Yup from "yup";
 import MainButton from "../../components/MainButton";
 import CustomTextInput from "../../components/CustomTextInput";
 import { GlobalStyles } from "../../constants/styles";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../../firebase";
 
 function SignupScreen({ navigation }) {
   const SignupFormSchema = Yup.object().shape({
@@ -30,12 +32,25 @@ function SignupScreen({ navigation }) {
           </View>
           <Formik
             initialValues={{ fullName: "", email: "", password: "" }}
-            onSubmit={(values) => {
-              console.log(values);
+            onSubmit={async (values) => {
+              // console.log(values);
+              await createUserWithEmailAndPassword(auth, values.email, values.password)
+              .then((userCredential) => {
+                console.log("Firebase Signup Successful!");
+              })
+              .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorMessage);
+                console.log(errorCode);
+              })
+              await updateProfile(auth.currentUser, {displayName: values.fullName})
+              .then(() => {
+                const user = auth.currentUser;
+                console.log("🔥Firebase Update Successful! ✅", user.email, user.displayName);
+              })
               navigation.push("DigitalMedicalScreen")
-              // onSignup(values.fullName, values.email, values.password, teamName, teamCode, !!teamIcon)
-              // createUser(values.fullName, values.email, values.password);
-              // console.log(values.fullName, values.email, values.password)
+              
             }}
             validationSchema={SignupFormSchema}
             validateOnMount={true}
