@@ -3,9 +3,16 @@ import MainButton from "../../components/MainButton";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { GlobalStyles } from "../../constants/styles";
+import { collection, addDoc, setDoc, doc, updateDoc, arrayUnion, getDoc} from "firebase/firestore"; 
+import { auth, db } from "../../firebase";
 /*
   Add tool-tip for some objective text inputs, to tell user why they should enter it
+*/
 
+/*
+  Send data to firestore: 
+    Create collection: UUID (name)
+      Create document: "user_information"
 */
 
 function DigitalMedicalScreen({ navigation }) {
@@ -45,7 +52,23 @@ function DigitalMedicalScreen({ navigation }) {
           medicationsTaken: "",
           primaryLanguages: "",
         }}
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
+          const userUUID = auth.currentUser.uid;
+          const userDisplayName = auth.currentUser.displayName;
+          const medicalInfo = {
+            homeAddress: values.homeAddress, 
+            allergies: values.allergies, 
+            medicationsTaken: values.medicationsTaken, 
+            primaryLanguages: values.primaryLanguages, 
+            dateOfBirth: "hard-coded value for now"
+          }
+          
+          await setDoc(doc(db, userUUID, "user_information"), {
+            name: userDisplayName, 
+            medicalInfo: medicalInfo,
+          })
+          
+
           console.log(values);
           navigation.push("EmergencyContactsScreen")
           // onSignup(values.fullName, values.email, values.password, teamName, teamCode, !!teamIcon)
@@ -128,12 +151,13 @@ export function TextField({
   onBlur,
   autoCorrect,
   textContentType,
-  width
+  width,
+  placeholderTextColor
 }) {
   return (
     <TextInput
       placeholder={placeholder}
-      placeholderTextColor="white"
+      placeholderTextColor="gray"
       style={{
         marginBottom: 20,
         color: "white",
