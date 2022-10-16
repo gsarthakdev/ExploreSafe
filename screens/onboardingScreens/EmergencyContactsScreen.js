@@ -10,7 +10,7 @@ import { auth, db } from "../../firebase";
   Contact name: email, password
 */
 
-function EmergencyContactsScreen() {
+function EmergencyContactsScreen({navigation}) {
   const [name1, setName1] = useState("");
   const [phoneNumber1, setPhoneNumber1] = useState("");
   const [name2, setName2] = useState("");
@@ -37,6 +37,7 @@ function EmergencyContactsScreen() {
     // await updateDoc(doc(db, userUID, "user_information" ), {
     //   emergency_contacts: emergencyContacts
     // })
+    navigation.push("DashboardScreen");
   }
   
   
