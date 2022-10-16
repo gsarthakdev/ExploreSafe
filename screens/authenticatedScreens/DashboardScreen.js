@@ -17,7 +17,7 @@ function DashboardScreen({ navigation }) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      const medical_info = docSnap.data().medicalInfo;
+      const medical_info = docSnap.data().medical_info;
       var allergies = medical_info.allergies;
       var medicationsTaken = medical_info.medicationsTaken;
       var primaryLanguages = medical_info.primaryLanguages;
