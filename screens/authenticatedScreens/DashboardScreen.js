@@ -41,6 +41,10 @@ function DashboardScreen({ navigation }) {
     set(newSOSRef, {
       // [randomID]: {
         full_name: auth.currentUser.displayName, 
+        user_location: {
+          latitude: location.coords.latitude, 
+          longitude: location.coords.longitude, 
+        }, 
         medical_ID: {
           allergies: allergies,
           medicationsTaken: medicationsTaken, 
