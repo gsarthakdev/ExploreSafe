@@ -33,10 +33,10 @@ function EmergencyContactsScreen({navigation}) {
       }
     ]
     console.log(emergencyContacts[0]);
-    // const userUID = auth.currentUser.uid;
-    // await updateDoc(doc(db, userUID, "user_information" ), {
-    //   emergency_contacts: emergencyContacts
-    // })
+    const userUID = auth.currentUser.uid;
+    await updateDoc(doc(db, userUID, "user_information" ), {
+      emergency_contacts: emergencyContacts
+    })
     navigation.push("DashboardScreen");
   }
   

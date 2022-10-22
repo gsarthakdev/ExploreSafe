@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import MainButton from "../../components/MainButton";
 import { ref, set, push } from "firebase/database";
+import {useState} from "react";
 import {RTdatabase, db, auth} from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 
@@ -17,7 +18,7 @@ function DashboardScreen({ navigation }) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      const medical_info = docSnap.data().medicalInfo;
+      const medical_info = docSnap.data().medical_info;
       var allergies = medical_info.allergies;
       var medicationsTaken = medical_info.medicationsTaken;
       var primaryLanguages = medical_info.primaryLanguages;
@@ -44,21 +45,6 @@ function DashboardScreen({ navigation }) {
         emergency_contacts: emergencyContacts
       // }
     });
-    
-    
-    /*
-    set(ref(RTdatabase, '/sos'), {
-      [randomID]: {
-        full_name: auth.currentUser.displayName, 
-        medical_ID: {
-          allergies: allergies,
-          medicationsTaken: medicationsTaken, 
-          primaryLanguages: primaryLanguages
-        },
-        emergency_contacts: emergencyContacts
-      }
-    });
-    */
   }
   
   return (
