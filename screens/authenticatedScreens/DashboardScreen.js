@@ -1,19 +1,23 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import MainButton from "../../components/MainButton";
 import { ref, set, push } from "firebase/database";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {RTdatabase, db, auth} from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
-
+import * as Location from 'expo-location';
+//MAKE A COMMIT
 function DashboardScreen({ navigation }) {
   function tester() {
     const here = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
     console.log(here);
   }
+  const [location, setLocation] = useState(null);
+  useEffect(() => {
+    getLocation();
+  }, [])
   
   async function sosHandler() {
     const randomID = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
-
     const docRef = doc(db, auth.currentUser.uid, "user_information");
     const docSnap = await getDoc(docRef);
 
@@ -46,6 +50,15 @@ function DashboardScreen({ navigation }) {
       // }
     });
   }
+
+
+
+  async function getLocation() {
+      let location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.BestForNavigation
+      });
+      setLocation(location);
+    }
   
   return (
     <View style={styles.container}>

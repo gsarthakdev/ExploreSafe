@@ -7,6 +7,7 @@ import SignupScreen from "./screens/onboardingScreens/SignupScreen";
 import TempLandingScreen from "./screens/onboardingScreens/TempLandingScreen";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SOSNearbyScreen from "./screens/authenticatedScreens/SOSNearbyScreen";
+import AskLocationScreen from "./screens/authenticatedScreens/tempTesting/AskLocationScreen";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -40,6 +41,7 @@ export function BottomTabsNavigation() {
   return ( 
     <NavigationContainer>
     <BottomTabs.Navigator screenOptions={{headerShown: false}}>
+      <BottomTabs.Screen name="AskLocationScreen" component={AskLocationScreen}/>
       <BottomTabs.Screen name="DashboardScreen" component={DashboardScreen}/>
       <BottomTabs.Screen name="SOSNearbyScreen" component={SOSNearbyScreen}/>
     </BottomTabs.Navigator>
