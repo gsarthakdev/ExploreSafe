@@ -83,7 +83,7 @@ export default function SOSNearbyScreen() {
     <View style={styles.container}>
       <View style={{ marginTop: 45, alignItems: 'center', marginBottom: 30}}>
           <Text style={{ fontSize: 20, fontWeight: "500", color: "white" }}>
-            Nearby SOS Screen
+            Nearby SOS
           </Text>
         <Text style={{ fontSize: 16, fontWeight: "300", color: "white" }}>
           People nearby, who need help

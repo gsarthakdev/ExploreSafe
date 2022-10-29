@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 import MapView from "react-native-maps";
 function NearbySOSCard({ fullName, milesDistance }) {
@@ -25,9 +25,16 @@ function NearbySOSCard({ fullName, milesDistance }) {
         {/* <Text style={{ color: "white" }}>🚶34 minutes to walk</Text> */}
       </View>
       <View style={{alignItems: 'center'}}>
-      <View style={{height: 234, borderRadius: 15, overflow: 'hidden', width: "90%", }}>
+      <View style={{marginBottom: 15, height: 234, borderRadius: 15, overflow: 'hidden', width: "90%", }}>
         <MapView style={{ width: "100%", height: "100%" }} />
       </View>
+      <Pressable>
+          <View style={{alignItems: 'center', backgroundColor: 'white', width: 200, padding: 10, borderRadius: 7}}>
+            <Text>
+              See details
+            </Text>
+          </View>
+        </Pressable>
       </View>
     </View>
   );
@@ -38,7 +45,7 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.darkModeAccent,
     width: "90%",
     borderRadius: 20,
-    height: 460,
+    height: 465,
   },
   header: {
     flexDirection: "row",
