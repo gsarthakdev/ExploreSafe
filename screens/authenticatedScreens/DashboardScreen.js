@@ -6,6 +6,7 @@ import {RTdatabase, db, auth, MAPS_API_KEY} from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import * as Location from 'expo-location';
 import axios from "axios"
+import { GlobalStyles } from "../../constants/styles";
 function DashboardScreen({ navigation }) {
   function tester() {
     const here = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
@@ -134,7 +135,7 @@ export default DashboardScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000000",
+    backgroundColor: GlobalStyles.colors.darkModeBackground,
     alignItems: "center",
   },
   sosButton: {

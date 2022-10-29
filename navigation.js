@@ -5,9 +5,10 @@ import DigitalMedicalScreen from "./screens/onboardingScreens/DigitalMedicalScre
 import EmergencyContactsScreen from "./screens/onboardingScreens/EmergencyContactsScreen";
 import SignupScreen from "./screens/onboardingScreens/SignupScreen";
 import TempLandingScreen from "./screens/onboardingScreens/TempLandingScreen";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SOSNearbyScreen from "./screens/authenticatedScreens/SOSNearbyScreen";
 import AskLocationScreen from "./screens/authenticatedScreens/tempTesting/AskLocationScreen";
+import { GlobalStyles } from "./constants/styles";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -21,9 +22,15 @@ export function SignedOutScreens() {
       >
         <Stack.Screen name="TempLandingScreen" component={TempLandingScreen} />
         <Stack.Screen name="SignupScreen" component={SignupScreen} />
-        <Stack.Screen name="DigitalMedicalScreen" component={DigitalMedicalScreen} />
-        <Stack.Screen name="EmergencyContactsScreen" component={EmergencyContactsScreen}/>
-        <Stack.Screen name="DashboardScreen" component={DashboardScreen}/>
+        <Stack.Screen
+          name="DigitalMedicalScreen"
+          component={DigitalMedicalScreen}
+        />
+        <Stack.Screen
+          name="EmergencyContactsScreen"
+          component={EmergencyContactsScreen}
+        />
+        <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -38,13 +45,22 @@ export function SignedInScreens() {
 */
 
 export function BottomTabsNavigation() {
-  return ( 
+  return (
     <NavigationContainer>
-    <BottomTabs.Navigator screenOptions={{headerShown: false}}>
-      <BottomTabs.Screen name="AskLocationScreen" component={AskLocationScreen}/>
-      <BottomTabs.Screen name="DashboardScreen" component={DashboardScreen}/>
-      <BottomTabs.Screen name="SOSNearbyScreen" component={SOSNearbyScreen}/>
-    </BottomTabs.Navigator>
+      <BottomTabs.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: { backgroundColor: GlobalStyles.colors.darkModeAccent },
+          tabBarActiveTintColor: "white",
+        }}
+      >
+        <BottomTabs.Screen
+          name="AskLocationScreen"
+          component={AskLocationScreen}
+        />
+        <BottomTabs.Screen name="DashboardScreen" component={DashboardScreen} />
+        <BottomTabs.Screen name="SOSNearbyScreen" component={SOSNearbyScreen} />
+      </BottomTabs.Navigator>
     </NavigationContainer>
   );
 }
