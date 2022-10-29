@@ -40,7 +40,7 @@ export default function AskLocationScreen() {
       let location = await Location.getCurrentPositionAsync({
         accuracy: Location.Accuracy.BestForNavigation
       });
-      setLocation(location);
+      setLocation(location.coords);
   }
 
   return (
