@@ -4,7 +4,6 @@ import { RTdatabase } from "../../firebase";
 import { useEffect, useState } from "react";
 import MainButton from "../../components/MainButton";
 import * as Location from 'expo-location';
-
 export default function SOSNearbyScreen() {
   // console.log("\n-----------");
   console.log("Logged");
@@ -73,6 +72,16 @@ export default function SOSNearbyScreen() {
         <Text>{data[0].full_name}</Text>
       )
     }
+  }
+
+  if (location == null) {
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <Text>
+          Finding nearby SOSs...
+        </Text>
+      </View>
+    )
   }
 
   return (
