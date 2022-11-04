@@ -70,7 +70,7 @@ function DashboardScreen({ navigation }) {
   //     setLocation(location);
   //   }
 
-
+    const [datad, setDatad] = useState([]);
     async function runAPI() {
       const link = "https://maps.googleapis.com/maps/api/distancematrix/json"
       const api_key = MAPS_API_KEY;
@@ -79,7 +79,7 @@ function DashboardScreen({ navigation }) {
       const originLng = -80.819890;
       const destinationLat = 35.40539296078933;
       const destinationLng = -80.73718225533925;
-      /*
+      // /*
       const response = await axios.get(link, {
         params: {
           origins: `${originLat},${originLng}`,
@@ -89,10 +89,11 @@ function DashboardScreen({ navigation }) {
           key: api_key
         }
       })
-      */
+      // */
       // const testH = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${originLat},${originLng}&destinations=${destinationLat},${destinationLng}&units=imperial&key=${api_key}`
       // const response = await axios.get(testH)
       console.log(response)
+      setDatad((current) => [...current, response])
     }
 
     function distanceCalculator(originLat, originLng, destinationLat, destinationLng) {
@@ -122,8 +123,11 @@ function DashboardScreen({ navigation }) {
         >
           ⚠️SOS
         </MainButton>
-        <MainButton isValid onPress={(() => console.log(location))}>
+        <MainButton isValid onPress={runAPI}>
           API
+        </MainButton>
+        <MainButton isValid onPress={() => console.log(datad[2].data.rows[0].elements[0].duration.text)}>
+          API Read
         </MainButton>
       </View>
     </View>

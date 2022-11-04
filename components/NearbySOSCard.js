@@ -1,7 +1,9 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 import MapView from "react-native-maps";
-function NearbySOSCard({ fullName, milesDistance }) {
+import { Timestamp } from "firebase/firestore";
+function NearbySOSCard({ fullName, milesDistance, walkingDistance }) {
+  const d = new Date();
   return (
     <View style={styles.container}>
       {/* --> Profile Image + Full Name <-- */}
@@ -13,7 +15,7 @@ function NearbySOSCard({ fullName, milesDistance }) {
           />
         </View>
         <Text style={{ color: "white", fontSize: 22 }}>
-          John Miller {fullName}
+          {fullName}
         </Text>
       </View>
       {/* __ Profile Image + Full Name __ */}
@@ -22,7 +24,7 @@ function NearbySOSCard({ fullName, milesDistance }) {
       <View style={{ marginLeft: 20, marginBottom: 20 }}>
         <Text style={{ color: "white", marginBottom: 9 }}>⏳1 hour ago</Text>
         <Text style={{ color: "white", marginBottom: 9 }}>
-          📍2.6 mi away • 34 minutes to walk
+          📍{milesDistance} away • {walkingDistance} to walk
         </Text>
       </View>
       {/* __ SOS Stats __ */}
@@ -30,9 +32,9 @@ function NearbySOSCard({ fullName, milesDistance }) {
       {/* --> MapView + See details button <-- */}
       <View style={{ alignItems: "center" }}>
         <Pressable onLongPress={() => console.log("****")} style={styles.mapView}>
-          <MapView style={{ width: "100%", height: "100%" }} />
+          <MapView style={{ width: "100%", height: "100%" }} provider="google" />
         </Pressable>
-        <Pressable style={({pressed}) => pressed && {opacity: 0.75}}>
+        <Pressable onPress={() => console.log()} style={({pressed}) => pressed && {opacity: 0.75}}>
           <View
             style={{
               alignItems: "center",
@@ -55,9 +57,13 @@ export default NearbySOSCard;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: GlobalStyles.colors.darkModeAccent,
-    width: "90%",
+    // width: "90%",
+    width: 345,
     borderRadius: 20,
     height: 465,
+    // marginRight: 10,
+    marginLeft: 10
+    // flex: 1
   },
   header: {
     flexDirection: "row",
