@@ -30,7 +30,7 @@ function SOSDetailsScreen({ route }) {
         <Text style={{color: 'white', fontSize: 16}}>{sosData.emergency_contacts[0].phone_number}</Text>
         <Text style={{color: '#98989f', fontSize: 16, marginBottom: 10}}>___________________________________</Text>
         <Text style={{color: '#98989f', fontSize: 16, marginBottom: 15}}>{sosData.emergency_contacts[1].name}</Text>
-        {/* <Text style={{color: 'white', fontSize: 16}}>{sosData.emergency_contacts[1].phone_number}</Text> */}
+        <Text style={{color: 'white', fontSize: 16}}>{sosData.emergency_contacts[1].phone_number}</Text>
         
       </View>
       </ScrollView>
