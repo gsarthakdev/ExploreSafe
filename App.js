@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { SignedOutScreens } from './navigation';
+import { BottomTabsNavigation, SignedInScreens, SignedOutScreens } from './navigation';
 import EmergencyContactsScreen from './screens/onboardingScreens/EmergencyContactsScreen';
 import TempLandingScreen from './screens/onboardingScreens/TempLandingScreen';
 
@@ -9,8 +9,11 @@ export default function App() {
       <>
       <StatusBar style="light" />
       {/* <SignedOutScreens/> */}
-      <EmergencyContactsScreen/>
+      {/* <BottomTabsNavigation/> */}
+      <SignedInScreens/>
       </>
+
+
   );
 }
 

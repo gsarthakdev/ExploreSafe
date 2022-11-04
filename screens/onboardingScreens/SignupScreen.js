@@ -34,6 +34,7 @@ function SignupScreen({ navigation }) {
             initialValues={{ fullName: "", email: "", password: "" }}
             onSubmit={async (values) => {
               // console.log(values);
+              // /*
               await createUserWithEmailAndPassword(auth, values.email, values.password)
               .then((userCredential) => {
                 console.log("Firebase Signup Successful!");
@@ -49,6 +50,7 @@ function SignupScreen({ navigation }) {
                 const user = auth.currentUser;
                 console.log("🔥Firebase Update Successful! ✅", user.email, user.displayName);
               })
+              // */
               navigation.push("DigitalMedicalScreen")
               
             }}

@@ -53,6 +53,7 @@ function DigitalMedicalScreen({ navigation }) {
           primaryLanguages: "",
         }}
         onSubmit={async (values) => {
+          // /*
           const userUUID = auth.currentUser.uid;
           const userDisplayName = auth.currentUser.displayName;
           const medicalInfo = {
@@ -65,9 +66,9 @@ function DigitalMedicalScreen({ navigation }) {
           
           await setDoc(doc(db, userUUID, "user_information"), {
             name: userDisplayName, 
-            medicalInfo: medicalInfo,
+            medical_info: medicalInfo,
           })
-          
+          // */
 
           console.log(values);
           navigation.push("EmergencyContactsScreen")
