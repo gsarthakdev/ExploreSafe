@@ -18,7 +18,7 @@ function NearbySOSCard({ fullName, milesDistance, walkingDistance, sosIndex }) {
           />
         </View>
         <Text style={{ color: "white", fontSize: 22 }}>
-          {fullName} {sosIndex}
+          {fullName}
         </Text>
       </View>
       {/* __ Profile Image + Full Name __ */}
@@ -37,7 +37,9 @@ function NearbySOSCard({ fullName, milesDistance, walkingDistance, sosIndex }) {
         <Pressable onLongPress={() => console.log("****")} style={styles.mapView}>
           <MapView style={{ width: "100%", height: "100%" }} provider="google" />
         </Pressable>
-        <Pressable onPress={() => navigation.push("SOSDetailsScreen")} style={({pressed}) => pressed && {opacity: 0.75}}>
+        <Pressable onPress={() => navigation.push("SOSDetailsScreen", {
+          sosData: sosIndex
+        })} style={({pressed}) => pressed && {opacity: 0.75}}>
           <View
             style={{
               alignItems: "center",
@@ -59,7 +61,7 @@ function NearbySOSCard({ fullName, milesDistance, walkingDistance, sosIndex }) {
 export default NearbySOSCard;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.darkModeAccent,
+  backgroundColor: GlobalStyles.colors.darkModeAccent,
     // width: "90%",
     width: 345,
     borderRadius: 20,

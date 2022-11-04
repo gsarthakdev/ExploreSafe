@@ -11,7 +11,7 @@ export default function SOSNearbyScreen() {
   async function runAPI(originLat, originLng, destinationLat, destinationLng, data) {
     // originLat, originLng, destinationLat, destinationLng
     // const link = "https://maps.googleapis.com/maps/api/distancematrix/json"
-    const link = "https://maps.googleapis.com/maps/api/distancematrix/json";
+    const link = "https://maps.ggleapis.com/maps/api/distancematrix/json";
     const api_key = MAPS_API_KEY;
     // const origin = {lat: 35.053950, lng: -80.819890};
     /*
@@ -27,7 +27,7 @@ export default function SOSNearbyScreen() {
         destinations: `${destinationLat},${destinationLng}`,
         units: "imperial",
         mode: "walking",
-        key: api_key
+        key: "api_key"
       }
     })
     // */
@@ -89,7 +89,8 @@ export default function SOSNearbyScreen() {
   const [data, setData] = useState([]);
   const [distanceData, setDistanceData] = useState([]);
   useEffect(() => {
-    if (location !== null && Platform.OS !== "ios") {
+    if (location !== null ) {
+      //&& Platform.OS !== "ios"
       const sosRef = ref(RTdatabase, "sos/");
       onValue(sosRef, (snapshot) => {
         console.log("*****" + location);
@@ -107,15 +108,15 @@ export default function SOSNearbyScreen() {
           console.log("Local Distance: " + localDistance);
           // if (localDistance < 9) {
           
-          runAPI(
-            location.latitude,
-            location.longitude,
-            sosLocation.latitude,
-            sosLocation.longitude,
-            data
-          );
+          // runAPI(
+          //   location.latitude,
+          //   location.longitude,
+          //   sosLocation.latitude,
+          //   sosLocation.longitude,
+          //   data
+          // );
           
-          // setData((current) => [...current, data]);
+          setData((current) => [...current, data]);
           // }
           // const getDistanceData = async () => {
           //   var distanceData = await runAPI();
@@ -164,41 +165,18 @@ export default function SOSNearbyScreen() {
   function Comp({ item, index }) {
     // for (var i = 0; i < distanceData.length; i++) {
       console.log("~~~~ " + index)
-      console.log(distanceData);
+      // console.log(distanceData);
       console.log("\n-------<<>>>>>-------");
-      console.log(distanceData[index].data.rows[0].elements[0].distance.text)
-      return (
-        <NearbySOSCard
-          fullName={item.full_name}
-          milesDistance={distanceData[index].data.rows[0].elements[0].distance.text}
-          // milesDistance={index}
-          />
-          );
-    // }
-    //IMPLEMENT FOR LOOP SOLUTION INSTEAD OF USING `INDEX`
-    
-    /*
-    if (distanceData.length == 1) {
       // console.log(distanceData[index].data.rows[0].elements[0].distance.text)
       return (
         <NearbySOSCard
           fullName={item.full_name}
-          milesDistance={distanceData[0].data.rows[0].elements[0].distance.text}
-          // walkingDistance={distanceData[index].data.rows[0].elements[0].duration.text}
-          // milesDistance={index}
+          // milesDistance={distanceData[index].data.rows[0].elements[0].distance.text}
+          milesDistance={index}
+          sosIndex={data[index]}
           />
           );
-        } else if (distanceData.length > 1) {
-          return (
-            <NearbySOSCard
-              fullName={item.full_name}
-              milesDistance={distanceData[index].data.rows[0].elements[0].distance.text}
-              // walkingDistance={distanceData[index].data.rows[0].elements[0].duration.text}
-              // milesDistance={index}
-              />
-              );
-        }
-        */
+    
       }
 
   return (
@@ -221,12 +199,12 @@ export default function SOSNearbyScreen() {
         renderItem={Comp}
       />
       {/* <NearbySOSCard/> */}
-      <MainButton isValid onPress={() => console.log(distanceData)}>
+      {/* <MainButton isValid onPress={() => console.log(distanceData)}>
         distanceData
       </MainButton>
       <MainButton isValid onPress={() => console.log(distanceData.length)}>
         Firebase data.length
-      </MainButton>
+      </MainButton> */}
       {/* <MainButton isValid onPress={() => console.log(location.latitude)}>
         Location Value
       </MainButton> */}
