@@ -2,7 +2,10 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 import MapView from "react-native-maps";
 import { Timestamp } from "firebase/firestore";
-function NearbySOSCard({ fullName, milesDistance, walkingDistance }) {
+import {useNavigation} from "@react-navigation/native"
+
+function NearbySOSCard({ fullName, milesDistance, walkingDistance, sosIndex }) {
+  const navigation = useNavigation();
   const d = new Date();
   return (
     <View style={styles.container}>
@@ -15,7 +18,7 @@ function NearbySOSCard({ fullName, milesDistance, walkingDistance }) {
           />
         </View>
         <Text style={{ color: "white", fontSize: 22 }}>
-          {fullName}
+          {fullName} {sosIndex}
         </Text>
       </View>
       {/* __ Profile Image + Full Name __ */}
@@ -34,7 +37,7 @@ function NearbySOSCard({ fullName, milesDistance, walkingDistance }) {
         <Pressable onLongPress={() => console.log("****")} style={styles.mapView}>
           <MapView style={{ width: "100%", height: "100%" }} provider="google" />
         </Pressable>
-        <Pressable onPress={() => console.log()} style={({pressed}) => pressed && {opacity: 0.75}}>
+        <Pressable onPress={() => navigation.push("SOSDetailsScreen")} style={({pressed}) => pressed && {opacity: 0.75}}>
           <View
             style={{
               alignItems: "center",

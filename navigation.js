@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SOSNearbyScreen from "./screens/authenticatedScreens/SOSNearbyScreen";
 import AskLocationScreen from "./screens/authenticatedScreens/tempTesting/AskLocationScreen";
 import { GlobalStyles } from "./constants/styles";
+import SOSDetailsScreen from "./screens/authenticatedScreens/SOSDetailsScreen";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -36,17 +37,23 @@ export function SignedOutScreens() {
   );
 }
 
-/*
 export function SignedInScreens() {
   return (
-    
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen
+          name="BottomTabsNavigation"
+          component={BottomTabsNavigation}
+        />
+        <Stack.Screen name="SOSDetailsScreen" component={SOSDetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-*/
 
 export function BottomTabsNavigation() {
   return (
-    <NavigationContainer>
+    // <NavigationContainer>
       <BottomTabs.Navigator
         screenOptions={{
           headerShown: false,
@@ -61,6 +68,6 @@ export function BottomTabsNavigation() {
         <BottomTabs.Screen name="DashboardScreen" component={DashboardScreen} />
         <BottomTabs.Screen name="SOSNearbyScreen" component={SOSNearbyScreen} />
       </BottomTabs.Navigator>
-    </NavigationContainer>
+    // </NavigationContainer>
   );
 }

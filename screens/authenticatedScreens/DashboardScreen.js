@@ -77,8 +77,8 @@ function DashboardScreen({ navigation }) {
       // const origin = {lat: 35.053950, lng: -80.819890};
       const originLat = 35.053950;
       const originLng = -80.819890;
-      const destinationLat = 35.40539296078933;
-      const destinationLng = -80.73718225533925;
+      const destinationLat = 28.40539296078933;
+      const destinationLng = -77.73718225533925;
       // /*
       const response = await axios.get(link, {
         params: {
@@ -123,7 +123,7 @@ function DashboardScreen({ navigation }) {
         >
           ⚠️SOS
         </MainButton>
-        <MainButton isValid onPress={runAPI}>
+        <MainButton isValid onPress={() => console.log("runapihere")}>
           API
         </MainButton>
         <MainButton isValid onPress={() => console.log(datad[2].data.rows[0].elements[0].duration.text)}>

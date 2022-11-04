@@ -8,7 +8,7 @@ import { GlobalStyles } from "../../constants/styles";
 import NearbySOSCard from "../../components/NearbySOSCard";
 import axios from "axios";
 export default function SOSNearbyScreen() {
-  async function runAPI(originLat, originLng, destinationLat, destinationLng) {
+  async function runAPI(originLat, originLng, destinationLat, destinationLng, data) {
     // originLat, originLng, destinationLat, destinationLng
     // const link = "https://maps.googleapis.com/maps/api/distancematrix/json"
     const link = "https://maps.googleapis.com/maps/api/distancematrix/json";
@@ -41,6 +41,8 @@ export default function SOSNearbyScreen() {
     // */
     console.log(`$$$$$ ${Platform.OS} API REQUEST MADE $$$$$`);
     setDistanceData((current) => [...current, response]);
+    setData((current) => [...current, data]);
+    //Set firebase data here, pass in data variable into this function
     // return response;
   }
 
@@ -104,13 +106,16 @@ export default function SOSNearbyScreen() {
           );
           console.log("Local Distance: " + localDistance);
           // if (localDistance < 9) {
+          
           runAPI(
             location.latitude,
             location.longitude,
             sosLocation.latitude,
-            sosLocation.longitude
+            sosLocation.longitude,
+            data
           );
-          setData((current) => [...current, data]);
+          
+          // setData((current) => [...current, data]);
           // }
           // const getDistanceData = async () => {
           //   var distanceData = await runAPI();
@@ -150,15 +155,26 @@ export default function SOSNearbyScreen() {
     },
   ];
 
-  function Comp({ item }) {
-    for (var i = 0; i < distanceData.length; i++) {
+
+  function encap() {
+
+  }
+  
+  
+  function Comp({ item, index }) {
+    // for (var i = 0; i < distanceData.length; i++) {
+      console.log("~~~~ " + index)
+      console.log(distanceData);
+      console.log("\n-------<<>>>>>-------");
+      console.log(distanceData[index].data.rows[0].elements[0].distance.text)
       return (
         <NearbySOSCard
           fullName={item.full_name}
-          milesDistance={distanceData[i].data.rows[0].elements[0].distance.text}
+          milesDistance={distanceData[index].data.rows[0].elements[0].distance.text}
+          // milesDistance={index}
           />
           );
-    }
+    // }
     //IMPLEMENT FOR LOOP SOLUTION INSTEAD OF USING `INDEX`
     
     /*
