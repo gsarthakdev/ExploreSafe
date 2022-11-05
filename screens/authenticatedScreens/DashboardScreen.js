@@ -99,7 +99,7 @@ function DashboardScreen({ navigation }) {
     function distanceCalculator(originLat, originLng, destinationLat, destinationLng) {
       // const originLat = 35.05293772088133;
       // const originLng = -80.81548894683974;
-      // // const destinationLat = 35.40539296078933; //1103 Old Trace
+      // // const destinationLat = 35.40539296078933; 
       // // const destinationLng = -80.73718225533925;
 
       // const destinationLat = 35.05361852680999; //CHMS
