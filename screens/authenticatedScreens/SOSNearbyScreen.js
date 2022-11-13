@@ -13,7 +13,7 @@ export default function SOSNearbyScreen() {
   async function runAPI(originLat, originLng, destinationLat, destinationLng, data) {
     // originLat, originLng, destinationLat, destinationLng
     // const link = "https://maps.googleapis.com/maps/api/distancematrix/json"
-    const link = "https://maps.googleapis.com/maps/api/distancematrix/json";
+    const link = "maps.googleapis.com/maps/api/distancematrix/json";
     const api_key = MAPS_API_KEY;
     // const origin = {lat: 35.053950, lng: -80.819890};
     /*
@@ -22,19 +22,21 @@ export default function SOSNearbyScreen() {
     const destinationLat = 35.40539296078933;
     const destinationLng = -80.73718225533925;
     // */
-    // /*
+    /*
     const response = await axios.get(link, {
       params: {
         origins: `${originLat},${originLng}`,
         destinations: `${destinationLat},${destinationLng}`,
         units: "imperial",
         mode: "walking",
-        key: api_key
+        key: "api_key"
       }
     })
     // */
     //  /*
     // const testH = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${originLat},${originLng}&destinations=${destinationLat},${destinationLng}&units=imperial&key=${api_key}`
+    // https://maps.googleapis.com/maps/api/distancematrix/json?origins=${originLat},${originLng}&destinations=${destinationLat},${destinationLng}&units=imperial&key=${api_key}
+    // https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=YOUR_API_KEY
     // const response = await axios.get(testH)
     // console.log(response);
     // console.log("*******Request made**********");
@@ -104,7 +106,7 @@ export default function SOSNearbyScreen() {
           );
           console.log("Local Distance: " + localDistance);
           // if (localDistance < 9) {
-          
+          /*
           runAPI(
             location.latitude,
             location.longitude,
@@ -112,8 +114,8 @@ export default function SOSNearbyScreen() {
             sosLocation.longitude,
             data
           );
-          
-          // setData((current) => [...current, data]);
+          */
+          setData((current) => [...current, data]);
           // }
           // const getDistanceData = async () => {
           //   var distanceData = await runAPI();
@@ -162,15 +164,16 @@ export default function SOSNearbyScreen() {
   function Comp({ item, index }) {
     // for (var i = 0; i < distanceData.length; i++) {
       console.log("~~~~ " + index)
-      console.log(distanceData);
+      // console.log(distanceData);
       console.log("\n-------<<>>>>>-------");
       // console.log(distanceData[index].data.rows[0].elements[0].distance.text)
       return (
         <NearbySOSCard
           fullName={item.full_name}
-          milesDistance={distanceData[index].data.rows[0].elements[0].distance.text}
-          // milesDistance={index}
-          sosIndex={data[index]}
+          // milesDistance={distanceData[index].data.rows[0].elements[0].distance.text}
+          milesDistance={index}
+          sosData={data[index]}
+          currentUserLocation={location}
           />
           );
     

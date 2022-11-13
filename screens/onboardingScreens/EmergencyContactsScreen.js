@@ -10,7 +10,8 @@ import { auth, db } from "../../firebase";
   Contact name: email, password
 */
 
-function EmergencyContactsScreen({navigation}) {
+function EmergencyContactsScreen({navigation, route}) {
+  const medicalInfo = route.params.medical_info;
   const [name1, setName1] = useState("");
   const [phoneNumber1, setPhoneNumber1] = useState("");
   const [name2, setName2] = useState("");
@@ -32,12 +33,15 @@ function EmergencyContactsScreen({navigation}) {
         phone_number: phoneNumber2
       }
     ]
-    console.log(emergencyContacts[0]);
-    const userUID = auth.currentUser.uid;
-    await updateDoc(doc(db, userUID, "user_information" ), {
-      emergency_contacts: emergencyContacts
-    })
-    navigation.push("DashboardScreen");
+    // console.log(emergencyContacts[0]);
+    // const userUID = auth.currentUser.uid;
+    // await updateDoc(doc(db, userUID, "user_information" ), {
+    //   emergency_contacts: emergencyContacts
+    // })
+    navigation.push("SignupScreen", {
+      emergencyContacts: emergencyContacts, 
+      medicalInfo: medicalInfo
+    });
   }
   
   

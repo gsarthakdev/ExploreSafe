@@ -13,15 +13,19 @@ import MainButton from "../../components/MainButton";
 import CustomTextInput from "../../components/CustomTextInput";
 import { GlobalStyles } from "../../constants/styles";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { setDoc, doc, } from "firebase/firestore"; 
 
-function SignupScreen({ navigation }) {
+
+function SignupScreen({ navigation, route }) {
+  const emergencyContacts = route.params.emergencyContacts;
+  const medicalInfo = route.params.medicalInfo;
   const SignupFormSchema = Yup.object().shape({
     fullName: Yup.string().required().min(2, "Your full name is required"),
     email: Yup.string().email().required("An email is required"),
     password: Yup.string()
       .required()
-      .min(6, "Your password must be at least 8 characters"),
+      .min(2, "Your password must be at least 8 characters"),
   });
   return (
     <View style={styles.container}>
@@ -36,8 +40,20 @@ function SignupScreen({ navigation }) {
               // console.log(values);
               // /*
               await createUserWithEmailAndPassword(auth, values.email, values.password)
-              .then((userCredential) => {
+              .then( async (userCredential) => {
                 console.log("Firebase Signup Successful!");
+                await updateProfile(auth.currentUser, {displayName: values.fullName})
+                .then(async () => {
+                  const user = auth.currentUser;
+                  console.log("🔥Firebase Update Successful! ✅", user.email, user.displayName);
+                  const userUID = auth.currentUser.uid;
+                  const userDisplayName = auth.currentUser.displayName;
+                  await setDoc(doc(db, userUID, "user_information"), {
+                    name: userDisplayName, 
+                    medical_info: medicalInfo,
+                    emergency_contacts: emergencyContacts
+                  })
+                })
               })
               .catch((error) => {
                 const errorCode = error.code;
@@ -45,13 +61,8 @@ function SignupScreen({ navigation }) {
                 console.log(errorMessage);
                 console.log(errorCode);
               })
-              await updateProfile(auth.currentUser, {displayName: values.fullName})
-              .then(() => {
-                const user = auth.currentUser;
-                console.log("🔥Firebase Update Successful! ✅", user.email, user.displayName);
-              })
               // */
-              navigation.push("DigitalMedicalScreen")
+              
               
             }}
             validationSchema={SignupFormSchema}
@@ -111,7 +122,7 @@ function SignupScreen({ navigation }) {
                       style={{
                         borderColor:
                           values.password.length < 1 ||
-                          values.password.length >= 6
+                          values.password.length >= 2
                             ? "transparent"
                             : "red",
                       }}
@@ -167,7 +178,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 45,
     textAlign: "center",
-    // fontFamily: "SourceSansPro-Black",
+    fontWeight: '600'
   },
   inputAndButtonContainer: {
     flex: 1,

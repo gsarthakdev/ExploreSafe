@@ -7,7 +7,7 @@ function TempLandingScreen({ navigation }) {
       <Text style={{ color: "white", marginBottom: 20 }}>ExploreSafe</Text>
       <Button
         title="Get started"
-        onPress={() => navigation.push("SignupScreen")}
+        onPress={() => navigation.push("DigitalMedicalScreen")}
       />
     </View>
   );

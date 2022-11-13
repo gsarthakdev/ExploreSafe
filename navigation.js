@@ -10,6 +10,7 @@ import SOSNearbyScreen from "./screens/authenticatedScreens/SOSNearbyScreen";
 import AskLocationScreen from "./screens/authenticatedScreens/tempTesting/AskLocationScreen";
 import { GlobalStyles } from "./constants/styles";
 import SOSDetailsScreen from "./screens/authenticatedScreens/SOSDetailsScreen";
+import SOSMapDirections from "./screens/authenticatedScreens/SOSMapDirections";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -31,7 +32,7 @@ export function SignedOutScreens() {
           name="EmergencyContactsScreen"
           component={EmergencyContactsScreen}
         />
-        <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
+        {/* <Stack.Screen name="DashboardScreen" component={DashboardScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -46,6 +47,7 @@ export function SignedInScreens() {
           component={BottomTabsNavigation}
         />
         <Stack.Screen name="SOSDetailsScreen" component={SOSDetailsScreen} />
+        <Stack.Screen name="SOSMapDirections" component={SOSMapDirections} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -61,10 +63,10 @@ export function BottomTabsNavigation() {
           tabBarActiveTintColor: "white",
         }}
       >
-        <BottomTabs.Screen
+        {/* <BottomTabs.Screen
           name="AskLocationScreen"
           component={AskLocationScreen}
-        />
+        /> */}
         <BottomTabs.Screen name="DashboardScreen" component={DashboardScreen} />
         <BottomTabs.Screen name="SOSNearbyScreen" component={SOSNearbyScreen} />
       </BottomTabs.Navigator>

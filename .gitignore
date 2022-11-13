@@ -14,3 +14,4 @@ exampleAPIReturnedData.json
 notes.txt
 # macOS
 .DS_Store
+/screens/authenticatedScreens/tempTesting/sosnearbyAPIworking.js

@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { GlobalStyles } from "../../constants/styles";
 import { collection, addDoc, setDoc, doc, updateDoc, arrayUnion, getDoc} from "firebase/firestore"; 
 import { auth, db } from "../../firebase";
+import { useEffect } from "react";
 /*
   Add tool-tip for some objective text inputs, to tell user why they should enter it
 */
@@ -15,7 +16,28 @@ import { auth, db } from "../../firebase";
       Create document: "user_information"
 */
 
+
+async function requestLocationAccess() {
+  let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      setErrorMsg('Permission to access location was denied');
+      try {
+        status = null;
+        // Alert.alert("Required", "Location access is neccesaary for the app to work", [{text: "Try again", onPress: () => requestLocationAccess() }])
+        // requestLocationAccess();
+        // let {newStatus} = await Location.requestForegroundPermissionsAsync();
+      } catch(e) {
+        console.log("error: " + e)
+      }
+      // return;
+    } 
+}
+
 function DigitalMedicalScreen({ navigation }) {
+  useEffect(() => {
+    requestLocationAccess()
+  }, [])
+  
   const MedicalCardSchema = Yup.object().shape({
     homeAddress: Yup.string()
       .required()
@@ -41,8 +63,7 @@ function DigitalMedicalScreen({ navigation }) {
             marginHorizontal: 20,
           }}
         >
-          This will be sent to your emergency contacts in the event of an
-          emergency
+          This will be used to provide quick help to you when an SOS is triggered
         </Text>
       </View>
       <Formik
@@ -54,24 +75,25 @@ function DigitalMedicalScreen({ navigation }) {
         }}
         onSubmit={async (values) => {
           // /*
-          const userUUID = auth.currentUser.uid;
-          const userDisplayName = auth.currentUser.displayName;
+          // const userUUID = auth.currentUser.uid;
+          // const userDisplayName = auth.currentUser.displayName;
           const medicalInfo = {
             homeAddress: values.homeAddress, 
             allergies: values.allergies, 
             medicationsTaken: values.medicationsTaken, 
             primaryLanguages: values.primaryLanguages, 
-            dateOfBirth: "hard-coded value for now"
           }
           
-          await setDoc(doc(db, userUUID, "user_information"), {
-            name: userDisplayName, 
-            medical_info: medicalInfo,
-          })
+          // await setDoc(doc(db, userUUID, "user_information"), {
+          //   name: userDisplayName, 
+          //   medical_info: medicalInfo,
+          // })
           // */
 
-          console.log(values);
-          navigation.push("EmergencyContactsScreen")
+          // console.log(values);
+          navigation.push("EmergencyContactsScreen", {
+            medical_info: medicalInfo
+          })
           // onSignup(values.fullName, values.email, values.password, teamName, teamCode, !!teamIcon)
           // createUser(values.fullName, values.email, values.password);
           // console.log(values.fullName, values.email, values.password)
@@ -101,7 +123,7 @@ function DigitalMedicalScreen({ navigation }) {
                 textContentType="fullStreetAddress"
                 value={values.homeAddress}
               />
-              <TextField placeholder="Date of Birth" />
+              {/* <TextField placeholder="Date of Birth" /> */}
               <TextField
                 placeholder="Allergies"
                 onChangeText={handleChange("allergies")}
