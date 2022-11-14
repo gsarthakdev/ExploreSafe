@@ -11,7 +11,7 @@ export default function InfoPassiveSOS({navigation}) {
         </Text>
       </View>
       <Text style={styles.description}>
-        Do you think you are in trouble or danger? Do you need help?
+        What if you have no cellular connection?
       </Text>
       <View
         style={{
@@ -28,16 +28,16 @@ export default function InfoPassiveSOS({navigation}) {
             marginTop: 20,
           }}
         >
-          Once you click the SOS Button: {"\n"}________________
+          After creading a route: {"\n"}________________
           <Text style={{ marginTop: 20 }}>
-            {"\n\n"} • Users within a 10 mile radius will see your SOS alert
+            {"\n\n"} • Our servers will use the user's input to determine if you have been offline for too long.
           </Text>
           <Text style={{ marginTop: 20 }}>
-            {"\n\n"} • Nearby Users will be able to see how far they are from
+            {"\n\n"} • If you have been offline for too long, our servers will send a message to your contacts.
             you
           </Text>
           <Text style={{ marginTop: 20 }}>
-            {"\n\n"} • Nearby users can get walking directions to come help you
+            {"\n\n"} • Contacts will receive information about your location history, last known loction, and other important information.
           </Text>
         </Text>
         <View style={{ marginTop: 30, alignItems: "center" }}>
