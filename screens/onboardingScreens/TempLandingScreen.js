@@ -1,8 +1,44 @@
 import { View, Text, StyleSheet, Button, TextInput, ImageBackground } from "react-native";
-import CustomTextInput from "../../components/CustomTextInput";
 import MainButton from "../../components/MainButton";
+import * as Location from 'expo-location';
+import React, { useState, useEffect } from 'react';
+import CustomTextInput from "../../components/CustomTextInput";
+import defineTasks from "../../components/Tasks";
+
+
+
+// Attempts to get location permissions from the device
+function getLocationPermissions() {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  let text = 'Waiting..';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+
+}
 
 function TempLandingScreen({ navigation }) {
+  getLocationPermissions();
+  defineTasks();
+
   return (
     <ImageBackground style={styles.container} resizeMode="cover" source={require("../../assets/ExploreImageBackground.png")}>
     <View>

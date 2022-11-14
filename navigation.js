@@ -13,6 +13,7 @@ import SOSDetailsScreen from "./screens/authenticatedScreens/SOSDetailsScreen";
 import SOSMapDirections from "./screens/authenticatedScreens/SOSMapDirections";
 import InfoNearbySOS from "./screens/onboardingScreens/InfoNearbySOS";
 import InfoPassiveSOS from "./screens/onboardingScreens/InfoPassiveSOS";
+import ActiveRouteScreen from "./screens/authenticatedScreens/ActiveRouteScreen";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -71,6 +72,7 @@ export function BottomTabsNavigation() {
           name="AskLocationScreen"
           component={AskLocationScreen}
         /> */}
+        <BottomTabs.Screen name="ActiveRouteScreen" component={ActiveRouteScreen} />
         <BottomTabs.Screen name="DashboardScreen" component={DashboardScreen} />
         <BottomTabs.Screen name="SOSNearbyScreen" component={SOSNearbyScreen} />
       </BottomTabs.Navigator>
