@@ -9,7 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-
+firebase.js
 exampleAPIReturnedData.json
 notes.txt
 # macOS
