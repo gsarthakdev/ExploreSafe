@@ -104,14 +104,17 @@ export default function SOSNearbyScreen() {
           );
           console.log("Local Distance: " + localDistance);
           // if (localDistance < 9) {
+
+            if (localDistance < 10) {
           
-          runAPI(
-            location.latitude,
-            location.longitude,
-            sosLocation.latitude,
-            sosLocation.longitude,
-            data
-          );
+              runAPI(
+                location.latitude,
+                location.longitude,
+                sosLocation.latitude,
+                sosLocation.longitude,
+                data
+              );
+            }
           
           // setData((current) => [...current, data]);
           // }
@@ -170,7 +173,9 @@ export default function SOSNearbyScreen() {
           fullName={item.full_name}
           milesDistance={distanceData[index].data.rows[0].elements[0].distance.text}
           // milesDistance={index}
-          sosIndex={data[index]}
+          sosData={data[index]}
+          currentUserLocation={location}
+          
           />
           );
     
