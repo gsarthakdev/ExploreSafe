@@ -25,7 +25,7 @@ function SignupScreen({ navigation, route }) {
     email: Yup.string().email().required("An email is required"),
     password: Yup.string()
       .required()
-      .min(2, "Your password must be at least 8 characters"),
+      .min(6, "Your password must be at least 8 characters"),
   });
   return (
     <View style={styles.container}>
@@ -122,12 +122,12 @@ function SignupScreen({ navigation, route }) {
                       style={{
                         borderColor:
                           values.password.length < 1 ||
-                          values.password.length >= 2
+                          values.password.length >= 6
                             ? "transparent"
                             : "red",
                       }}
                     >
-                      Password
+                      Password (At least 6 characters)
                     </CustomTextInput>
                   </View>
                   <View style={styles.padding}>
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: "#000000",
+    backgroundColor: "#0c1323",
     alignItems: "center",
   },
   headingText: {

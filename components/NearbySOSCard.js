@@ -81,7 +81,7 @@ function NearbySOSCard({
               }}
               pinColor="red"
             />
-            {/* <MapViewDirections
+            <MapViewDirections
               origin={markerCoords[0]}
               destination={{
                 latitude: sosData.user_location.latitude,
@@ -90,7 +90,7 @@ function NearbySOSCard({
               apikey={MAPS_API_KEY}
               strokeWidth={3}
               strokeColor="hotpink"
-            /> */}
+            />
           </MapView>
         </Pressable>
         <Pressable

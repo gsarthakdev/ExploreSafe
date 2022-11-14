@@ -6,6 +6,7 @@ import { GlobalStyles } from "../../constants/styles";
 import { collection, addDoc, setDoc, doc, updateDoc, arrayUnion, getDoc} from "firebase/firestore"; 
 import { auth, db } from "../../firebase";
 import { useEffect } from "react";
+import * as Location from 'expo-location';
 /*
   Add tool-tip for some objective text inputs, to tell user why they should enter it
 */
@@ -115,7 +116,7 @@ function DigitalMedicalScreen({ navigation }) {
             >
               {/* <TextInput placeholder="Home Address" placeholderTextColor="white" style={{ color: 'white', borderColor: 'white', borderWidth: 2, borderRadius: 7, padding: 6, alignItems: 'center'}}/> */}
               <TextField
-                placeholder="Home Address"
+                placeholder="Home Address (Can be 123 Main Street)"
                 autoFocus={true}
                 onChangeText={handleChange("homeAddress")}
                 onBlur={handleBlur("homeAddress")}
@@ -175,7 +176,8 @@ export function TextField({
   autoCorrect,
   textContentType,
   width,
-  placeholderTextColor
+  placeholderTextColor,
+  value
 }) {
   return (
     <TextInput
@@ -197,6 +199,7 @@ export function TextField({
       onBlur={onBlur}
       autoCorrect={autoCorrect}
       textContentType={textContentType}
+      value={value}
     />
   );
 }

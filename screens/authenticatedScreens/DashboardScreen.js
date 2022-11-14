@@ -6,6 +6,7 @@ import {RTdatabase, db, auth, MAPS_API_KEY} from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import * as Location from 'expo-location';
 import axios from "axios"
+import { signOut } from "firebase/auth";
 import { GlobalStyles } from "../../constants/styles";
 function DashboardScreen({ navigation }) {
   function tester() {
@@ -16,6 +17,14 @@ function DashboardScreen({ navigation }) {
   // useEffect(() => {
   //   getLocation();
   // }, [])
+  
+  async function signOutHandler() {
+    await signOut(auth).then(() => {
+      console.log("Signed out successfully!")
+    }).catch((error) => {
+      console.log("Error", error)
+    })
+  }
   
   async function sosHandler() {
     const randomID = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
@@ -121,6 +130,7 @@ function DashboardScreen({ navigation }) {
         <MainButton isValid onPress={() => console.log(datad[2].data.rows[0].elements[0].duration.text)}>
           API Read
         </MainButton> */}
+        <MainButton isValid onPress={signOutHandler}>Sign out (testing)</MainButton>
       </View>
     </View>
   );

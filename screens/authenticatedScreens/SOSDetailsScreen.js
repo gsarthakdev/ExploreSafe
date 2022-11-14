@@ -110,9 +110,7 @@ function SOSDetailsScreen({ route, navigation }) {
           <Pressable
             onPress={() => {
               directionsAPI();
-              // console.log(response.data.routes[0].legs[0].steps[0].distance.text)
-              // console.log(response.data.routes[0].legs[0].steps[0].html_instructions.toString().replace("<b>", "").replace("</b>", ""))
-              // console.log(response.data.routes[0].legs[0].steps);
+              
              
             }}
             style={({ pressed }) => pressed && { opacity: 0.75 }}
@@ -150,10 +148,13 @@ function SOSDetailsScreen({ route, navigation }) {
     console.log(response);
     // setResponse(response);
     navigation.push("SOSMapDirections", {
-      directionsData: response.data.routes[0].legs[0].steps 
+      directionsData: response.data.routes[0].legs[0].steps
     })
+    //response.data.routes[0].legs[0].steps
     // setHere(response.data.routes[0].legs[0].steps[0].html_instructions);
-
+    // console.log(response.data.routes[0].legs[0].steps[0].distance.text)
+              // console.log(response.data.routes[0].legs[0].steps[0].html_instructions.toString().replace("<b>", "").replace("</b>", ""))
+              // console.log(response.data.routes[0].legs[0].steps);
   }              
 
   

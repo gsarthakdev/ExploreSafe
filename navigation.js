@@ -11,6 +11,8 @@ import AskLocationScreen from "./screens/authenticatedScreens/tempTesting/AskLoc
 import { GlobalStyles } from "./constants/styles";
 import SOSDetailsScreen from "./screens/authenticatedScreens/SOSDetailsScreen";
 import SOSMapDirections from "./screens/authenticatedScreens/SOSMapDirections";
+import InfoNearbySOS from "./screens/onboardingScreens/InfoNearbySOS";
+import InfoPassiveSOS from "./screens/onboardingScreens/InfoPassiveSOS";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -32,7 +34,9 @@ export function SignedOutScreens() {
           name="EmergencyContactsScreen"
           component={EmergencyContactsScreen}
         />
+        <Stack.Screen name="InfoNearbySOS" component={InfoNearbySOS}/>
         {/* <Stack.Screen name="DashboardScreen" component={DashboardScreen} /> */}
+        <Stack.Screen name="InfoPassiveSOS" component={InfoPassiveSOS}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
