@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, Text, StyleSheet, Pressable, TextInput, Modal, Picker, Button, Linking } from "react-native";
+import { View, Text, StyleSheet, Pressable, TextInput, Modal, Picker, Button, Linking, Alert } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { RTdatabase, db, auth } from "../../firebase";
 import { ref, set } from "firebase/database";
@@ -122,26 +122,113 @@ function ActiveRouteScreen() {
         if (passiveSOS) {
             return (
                 <View style={styles.container}>
-                    <Text>Select button below to trigger a passive SOS alert.</Text>
-                    <Button title="Trigger Passive SOS" onPress={() => setPassiveSOS(true)}></Button>
+                    <View style={styles.centeredView}>
+                    <Text style={{color:"white", marginBottom:10}}>Select button below to trigger a passive SOS alert.</Text>
+                    <Pressable
+                        onPress={() => setPassiveSOS(true)}
+                        style={({ pressed }) => pressed && { opacity: 0.75 }}
+                    >
+                        <View
+                            style={{
+                                alignItems: "center",
+                                backgroundColor: "white",
+                                width: 200,
+                                padding: 10,
+                                borderRadius: 7,
+                                marginBottom: 30
+                            }}
+                        >
+                            <Text>Trigger Passive SOS</Text>
+                        </View>
+                    </Pressable>
     
-                    <Text >Select button below to access web portal. The web portal shows what one of your contacts would see if an SOS was called.</Text>
-                    <Button title="Open Website" onPress={() => Linking.openURL("https://exploresafe-362903.firebaseapp.com/" + routeID)}></Button>
-    
-    
-                    <Text>Select button below to end the route.</Text>
-                    <Button title="Stop Route" onPress={unregisterBackgroundFetchAsync}></Button>
+                    <Text style={{color:"white", marginBottom:10, marginHorizontal:50, textAlign:"center"}}>Select button below to access web portal. The web portal shows what one of your contacts would see if an SOS was called.</Text>
+                    <Pressable
+                        onPress={() => Linking.openURL("https://exploresafe-362903.firebaseapp.com/" + routeID)}
+                        style={({ pressed }) => pressed && { opacity: 0.75 }}
+                    >
+                        <View
+                            style={{
+                                alignItems: "center",
+                                backgroundColor: "white",
+                                width: 200,
+                                padding: 10,
+                                borderRadius: 7,
+                                marginBottom: 30
+                            }}
+                        >
+                            <Text>Open Website</Text>
+                        </View>
+                    </Pressable>
+
+                    <Text style={{color:"white", marginBottom:10, marginHorizontal:50, textAlign:"center"}}>Select button below to end the route.</Text>
+                    <Pressable
+                        onPress={unregisterBackgroundFetchAsync}
+                        style={({ pressed }) => pressed && { opacity: 0.75 }}
+                    >
+                        <View
+                            style={{
+                                alignItems: "center",
+                                backgroundColor: "white",
+                                width: 200,
+                                padding: 10,
+                                borderRadius: 7,
+                                marginBottom: 30
+                            }}
+                        >
+                            <Text>Stop Route</Text>
+                        </View>
+                    </Pressable>
+                    </View>
+
                 </View>
             )
         } else {
             return (
                 <View style={styles.container}>
-                    <Text>Select button below to trigger a passive SOS alert.</Text>
-                    <Button title="Trigger Passive SOS" onPress={() => setPassiveSOS(true)}></Button>    
+                    <View style={styles.centeredView}>
+                    <Text style={{color:"white", marginBottom:10}}>Select button below to trigger a passive SOS alert.</Text>
+                    <Pressable
+                        onPress={() => setPassiveSOS(true)}
+                        style={({ pressed }) => pressed && { opacity: 0.75 }}
+                    >
+                        <View
+                            style={{
+                                alignItems: "center",
+                                backgroundColor: "white",
+                                width: 200,
+                                padding: 10,
+                                borderRadius: 7,
+                                marginBottom: 30
+                            }}
+                        >
+                            <Text>Trigger Passive SOS</Text>
+                        </View>
+                    </Pressable>
     
-                    <Text>Select button below to end the route.</Text>
-                    <Button title="Stop Route" onPress={unregisterBackgroundFetchAsync}></Button>
+
+                    <Text style={{color:"white", marginBottom:10, marginHorizontal:50, textAlign:"center"}}>Select button below to end the route.</Text>
+                    <Pressable
+                        onPress={unregisterBackgroundFetchAsync}
+                        style={({ pressed }) => pressed && { opacity: 0.75 }}
+                    >
+                        <View
+                            style={{
+                                alignItems: "center",
+                                backgroundColor: "white",
+                                width: 200,
+                                padding: 10,
+                                borderRadius: 7,
+                                marginBottom: 30
+                            }}
+                        >
+                            <Text>Stop Route</Text>
+                        </View>
+                    </Pressable>
+                    </View>
+
                 </View>
+
             )
         }
 
@@ -149,6 +236,30 @@ function ActiveRouteScreen() {
         return (
             <View style={styles.container}>
                 <View style={styles.centeredView}>
+                <View style={{ marginTop: 45, alignItems: "center", marginHorizontal: 20 }}>
+                    <Text style={{ fontSize: 20, fontWeight: "500", color: "white" }}>
+                        Routes
+                    </Text>
+                    <Text style={{ fontSize: 16, fontWeight: "300", color: "white", marginBottom: 20 }}>
+                        You have not started an active route. To start a route, select the start button below.
+                    </Text>
+                    <Pressable
+                        onPress={() => setModalVisible(!modalVisible)}
+                        style={({ pressed }) => pressed && { opacity: 0.75 }}
+                    >
+                        <View
+                            style={{
+                                alignItems: "center",
+                                backgroundColor: "white",
+                                width: 200,
+                                padding: 10,
+                                borderRadius: 7,
+                            }}
+                        >
+                            <Text>Start Route</Text>
+                        </View>
+                    </Pressable>
+                </View>
                     <Modal
                         animationType="fade"
                         transparent={true}
@@ -196,30 +307,6 @@ function ActiveRouteScreen() {
                             </View>
                         </View>
                     </Modal>
-                </View>
-                <View style={{ marginTop: 45, alignItems: "center", marginHorizontal: 20 }}>
-                    <Text style={{ fontSize: 20, fontWeight: "500", color: "white" }}>
-                        Routes
-                    </Text>
-                    <Text style={{ fontSize: 16, fontWeight: "300", color: "white", marginBottom: 20 }}>
-                        You have not started an active route. To start a route, select the start button below.
-                    </Text>
-                    <Pressable
-                        onPress={() => setModalVisible(!modalVisible)}
-                        style={({ pressed }) => pressed && { opacity: 0.75 }}
-                    >
-                        <View
-                            style={{
-                                alignItems: "center",
-                                backgroundColor: "white",
-                                width: 200,
-                                padding: 10,
-                                borderRadius: 7,
-                            }}
-                        >
-                            <Text>Start Route</Text>
-                        </View>
-                    </Pressable>
                 </View>
                 {/* <View style={{backgroundColor: 'blue', }}>
             </View> */}
